@@ -1,6 +1,18 @@
 var gongAudio = $("audio")[0];
 $("#gong").click(function(){
   gongAudio.play();
+
+  var selection = Math.floor(Math.random() * 3);
+
+  $(".cheer").css("background-color", colorList[selection]);
+  $(".cheer-text").html(cheerList[selection]);
+  $(".cheer").addClass("showing");
+
+
+  setTimeout(function(){
+    $(".cheer").removeClass("showing");
+  }, 1500);
+
 });
 
 var colorList = ["#f1c40f", "#9b59b6", "#f39c12"];
@@ -20,24 +32,9 @@ Leap.loop({background: true}, {
         
         if (normalizedPosition[2] == 0) {
           $("#gong").trigger("click");
-        
-
-          // display cheer
-        
-
-          var selection = Math.floor(Math.random() * 3);
-
-          $(".cheer").css("background-color", colorList[selection]);
-          $(".cheer").html(cheerList[selection]);
-          $(".cheer").addClass("showing");
-
-
-          setTimeout(function(){
-            $(".cheer").removeClass("showing");
-          }, 1500);        
         };
       };
-    };
+    
 
       hand.fingers.forEach(function (finger) {
 

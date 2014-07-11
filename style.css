@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
 	overflow: hidden;
 }
@@ -18,19 +22,25 @@ body {
 	left: 0;
 	height: 100%;
 	width: 100%;
-	/*display: none;*/
 	opacity: 0;
 
+	-webkit-transition: 0.2s opacity ease;
+	-moz-transition: 0.2s opacity ease;
+	-o-transition: 0.2s opacity ease;
+	transition: 0.2s opacity ease;
+}
+
+.cheer-text {
 	font-size: 60px;
 	text-align: center;
-	color: black;
-
-	-webkit-transition: 0.2s opacity ease;
-	transition: 0.2s opacity ease;
+	color: #ffffff;
+	text-shadow: 2px 2px #000000;
 }
 
 .cheer.showing {
 	opacity: 1;
 	-webkit-transition: 0.2s opacity ease;
+	-moz-transition: 0.2s opacity ease;
+	-o-transition: 0.2s opacity ease;
 	transition: 0.2s opacity ease;
 }
