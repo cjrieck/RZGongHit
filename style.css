@@ -31,10 +31,12 @@ body {
 }
 
 .cheer-text {
-	font-size: 60px;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: 160px;
 	text-align: center;
 	color: #ffffff;
-	text-shadow: 2px 2px #000000;
+	text-shadow: 2px 0px 10px #646464;
+	margin-top: 20%;
 }
 
 .cheer.showing {
