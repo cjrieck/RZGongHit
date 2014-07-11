@@ -11,7 +11,7 @@ $("#gong").click(function(){
 
   setTimeout(function(){
     $(".cheer").removeClass("showing");
-  }, 1500);
+  }, 2500);
 
 });
 
