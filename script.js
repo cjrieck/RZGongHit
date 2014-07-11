@@ -1,17 +1,40 @@
-$(document).ready(function(){
-	var gongAudio = $("audio")[0];
-	$("#gong").click(function(){
-		gongAudio.play();
-	});
+var gongAudio = $("audio")[0];
+$("#gong").click(function(){
+  gongAudio.play();
 });
 
 // Leap Motion Code
 var baseBoneRotation = (new THREE.Quaternion).setFromEuler(
 		new THREE.Euler(Math.PI / 2, 0, 0)
-	);
+);
 
-	  Leap.loop({background: true}, {
+var controller = new Leap.Controller();
+controller.on("frame", function(frame) {
+  if (frame.pointables.length > 0) {
+    console.log(frame.pointables.length);
+    var pointable = frame.pointables[0];
+    var interactionBox = frame.interactionBox;
+    var normalizedPosition = interactionBox.normalizePoint(pointable.tipPosition, true);
+    console.log(normalizedPosition);
+    if (normalizedPosition[2] < -36) {
+      $("#gong").trigger("click");
+      
+    };
+  };
+});
+
+Leap.loop({background: true}, {
     hand: function (hand) {
+      if (hand.frame.pointables.length > 0) {
+        var pointable = hand.frame.pointables[0];
+        var interactionBox = hand.frame.interactionBox;
+        var normalizedPosition = interactionBox.normalizePoint(pointable.tipPosition, true);
+        console.log(normalizedPosition);
+        if (normalizedPosition[2] == 0) {
+          $("#gong").trigger("click");
+          
+        };
+      };
 
       hand.fingers.forEach(function (finger) {
 
@@ -43,7 +66,6 @@ var baseBoneRotation = (new THREE.Quaternion).setFromEuler(
         });
 
       });
-
     renderer.render(scene, camera);
 
   }}) // end Leap.loop
@@ -92,7 +114,6 @@ var baseBoneRotation = (new THREE.Quaternion).setFromEuler(
       finger.data('jointMeshes', jointMeshes);
 
     });
-
   })
   .on('handLost', function(hand){
 
@@ -119,7 +140,6 @@ var baseBoneRotation = (new THREE.Quaternion).setFromEuler(
     renderer.render(scene, camera);
 
   }).connect();
-
 
   // all units in mm
   var initScene = function () {
@@ -162,12 +182,3 @@ var baseBoneRotation = (new THREE.Quaternion).setFromEuler(
   };
 
 initScene();
-
-var canvas = document.getElementsByTagName('canvas')[0];
-var context = canvas.getContext('2d');
-
-var image = new Image();
-image.src = 'gong.png';
-console.log(canvas);
-console.log(image);
-context.drawImage(image, 500, 500);
