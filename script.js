@@ -3,25 +3,13 @@ $("#gong").click(function(){
   gongAudio.play();
 });
 
+var colorList = ["#f1c40f", "#9b59b6", "#f39c12"];
+var cheerList = ["Good work!", "Great job!", "Keep it up!"];
+
 // Leap Motion Code
 var baseBoneRotation = (new THREE.Quaternion).setFromEuler(
 		new THREE.Euler(Math.PI / 2, 0, 0)
 );
-
-var controller = new Leap.Controller();
-controller.on("frame", function(frame) {
-  if (frame.pointables.length > 0) {
-    console.log(frame.pointables.length);
-    var pointable = frame.pointables[0];
-    var interactionBox = frame.interactionBox;
-    var normalizedPosition = interactionBox.normalizePoint(pointable.tipPosition, true);
-    console.log(normalizedPosition);
-    if (normalizedPosition[2] < -36) {
-      $("#gong").trigger("click");
-      
-    };
-  };
-});
 
 Leap.loop({background: true}, {
     hand: function (hand) {
@@ -29,12 +17,27 @@ Leap.loop({background: true}, {
         var pointable = hand.frame.pointables[0];
         var interactionBox = hand.frame.interactionBox;
         var normalizedPosition = interactionBox.normalizePoint(pointable.tipPosition, true);
-        console.log(normalizedPosition);
+        
         if (normalizedPosition[2] == 0) {
           $("#gong").trigger("click");
-          
+        
+
+          // display cheer
+        
+
+          var selection = Math.floor(Math.random() * 3);
+
+          $(".cheer").css("background-color", colorList[selection]);
+          $(".cheer").html(cheerList[selection]);
+          $(".cheer").addClass("showing");
+
+
+          setTimeout(function(){
+            $(".cheer").removeClass("showing");
+          }, 1500);        
         };
       };
+    };
 
       hand.fingers.forEach(function (finger) {
 

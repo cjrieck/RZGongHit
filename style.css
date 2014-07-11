@@ -1,3 +1,7 @@
+body {
+	overflow: hidden;
+}
+
 .container {
 	z-index: 2;
 	display: block;
@@ -5,5 +9,28 @@
 }
 
 #gong {
-	margin: 0 auto;
+	height: 100%;
+}
+
+.cheer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	/*display: none;*/
+	opacity: 0;
+
+	font-size: 60px;
+	text-align: center;
+	color: black;
+
+	-webkit-transition: 0.2s opacity ease;
+	transition: 0.2s opacity ease;
+}
+
+.cheer.showing {
+	opacity: 1;
+	-webkit-transition: 0.2s opacity ease;
+	transition: 0.2s opacity ease;
 }
