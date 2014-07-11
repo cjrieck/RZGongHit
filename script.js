@@ -1,3 +1,10 @@
+$(document).ready(function(){
+	$("#gong").click(function(){
+		
+	});
+});
+
+
 // var baseBoneRotation = (new THREE.Quaternion).setFromEuler(
 // 		new THREE.Euler(Math.PI / 2, 0, 0)
 // 	);
