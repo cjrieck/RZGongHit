@@ -162,3 +162,12 @@ var baseBoneRotation = (new THREE.Quaternion).setFromEuler(
   };
 
 initScene();
+
+var canvas = document.getElementsByTagName('canvas')[0];
+var context = canvas.getContext('2d');
+
+var image = new Image();
+image.src = 'gong.png';
+console.log(canvas);
+console.log(image);
+context.drawImage(image, 500, 500);
